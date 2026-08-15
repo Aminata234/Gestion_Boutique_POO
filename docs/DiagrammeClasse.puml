@@ -1,6 +1,14 @@
 @startuml
 
 
+class Utilisateur {
+    id
+    nom
+    email
+    motDePasse
+    role
+    actif
+}
 
 class Produit {
     id
@@ -8,6 +16,8 @@ class Produit {
     prixAchat
     prixVente
     quantiteStock
+    stockMinimum
+    actif
 }
 
 class Client {
@@ -15,27 +25,34 @@ class Client {
     nom
     prenom
     telephone
-    
+    limiteCredit
+    detteTotale
 }
 
 class Commande {
     id
+    reference
     dateCommande
     montantTotal
     modeReglement
+    statut
 }
 
 class LigneCommande {
     id
     quantite
     prixUnitaire
+    sousTotal
 }
 
 class Dette {
     id
+    reference
     montantInitial
+    montantPaye
     montantRestant
     statut
+    dateCreation
 }
 
 class Paiement {
@@ -47,37 +64,43 @@ class Paiement {
 
 class Fournisseur {
     id
-    nom
+    entreprise
     telephone
     adresse
+    email
+    actif
 }
 
 class Approvisionnement {
     id
+    referenceBL
     dateReception
-    numeroBL
+    total
+    statut
 }
 
 class LigneApprovisionnement {
     id
     quantiteRecue
     prixAchatUnitaire
+    sousTotal
 }
 
-Client "1" -- "0..*" Commande
 
-Commande "1" -- "0..*" LigneCommande
 
+Client "1" -- "0..*" Commande 
+Commande "1" -- "1..*" LigneCommande 
 Produit "1" -- "0..*" LigneCommande
 
-Commande "1" -- "0..1" Dette
+Client "1" -- "0..*" Dette 
+Commande "1" -- "0..1" Dette 
+Dette "1" -- "0..*" Paiement 
 
-Dette "1" -- "0..*" Paiement
+Fournisseur "1" -- "0..*" Approvisionnement 
+Approvisionnement "1" -- "1..*" LigneApprovisionnement 
+Produit "1" -- "0..*" LigneApprovisionnement 
 
-Fournisseur "1" -- "0..*" Approvisionnement
-
-Approvisionnement "1" -- "0..*" LigneApprovisionnement
-
-Produit "1" -- "0..*" LigneApprovisionnement
+Utilisateur "1" -- "0..*" Commande 
+Utilisateur "1" -- "0..*" Approvisionnement 
 
 @enduml
