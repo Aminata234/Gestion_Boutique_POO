@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+actor "Charge stock" as CS
+
+rectangle "Inventaire" {
+
+    usecase "Se connecter" as SC
+
+    usecase "Lister Statistiques" as LS
+    usecase "Lister inventaires" as LI
+    usecase "Voir valeur totale stock" as VVTS
+    usecase "Voir total articles en rupture" as VTAR
+    usecase "Voir total ecarts" as VTE
+    
+    
+    usecase "Voir lignes inventaire" as VLI
+    usecase "Creer inventaire" as CI
+    usecase "Saisir quantite comptee" as SQC
+    usecase "Voir ecarts" as VE
+    usecase "Valider inventaire" as VI
+    usecase "Generer rapport" as GR
+}
+
+CS --> LS
+CS --> LI
+
+LS ..> VVTS : <<include>>
+LS ..> VTAR : <<include>>
+LS ..> VTE : <<include>>
+
+VLI ..> LI : <<extend>>
+VE ..> LI : <<extend>>
+CI ..> LI : <<extend>>
+VI ..> LI : <<extend>>
+GR ..> LI : <<extend>>
+
+CI ..> SQC : <<include>>
+
+VI ..> VE : <<include>>
+
+@enduml

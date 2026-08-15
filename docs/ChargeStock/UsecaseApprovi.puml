@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+actor "Charge stock" as CS
+
+rectangle "Approvisionnements" {
+
+    usecase "Se connecter" as SC
+
+    usecase "Lister Statistiques" as LS
+    usecase "Lister receptions" as LR
+    usecase "Voir couts total des achats" as VCTA
+    usecase "Voir total bon de reception" as VTBR
+    usecase "Voir total fournisseurs" as VTF
+    
+    
+    usecase "Voir lignes articles" as VLA
+    usecase "Receptionner" as R
+    usecase "Saisir quantite recue" as SQR
+    usecase "Lister articles recues" as LAR
+}
+
+CS --> LS
+CS --> LR
+
+LS ..> VCTA : <<include>>
+LS ..> VTBR : <<include>>
+LS ..> VTF : <<include>>
+
+VLA ..> LR : <<extend>>
+LAR ..> LR : <<extend>>
+R ..> LR : <<extend>>
+
+R ..> SQR : <<include>>
+
+
+@enduml

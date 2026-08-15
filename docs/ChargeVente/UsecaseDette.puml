@@ -1,0 +1,44 @@
+@startuml
+
+left to right direction
+
+actor "Charge vente" as CV
+
+rectangle "Gerer Dette"{
+
+    usecase "Se connecter" as SC
+
+    usecase "Lister statistiques" as LS 
+    usecase "Lister dettes en cours" as LDA
+    
+    usecase "Voir dettes non payees" as VCA
+    usecase "Voir clients qui doivent encore" as VCD
+    usecase "Voir total deja encaisse" as VTR
+
+    
+    usecase "Voir articles de la dette" as LA
+    usecase "Selectionner un client" as RC
+    usecase "Voir paiements deja faits" as LP
+    usecase "Encaisser un paiement" as ER
+    usecase "Choisir moyen de paiement" as SCP
+    usecase "Saisir montant recu" as SMV
+}
+
+CV --> LS
+CV --> LDA
+
+LS ..> VCA : <<include>>
+LS ..> VCD : <<include>>
+LS ..> VTR : <<include>>
+
+LDA ..> RC : <<include>>
+
+LP ..> LDA : <<extend>>
+ER ..> LDA : <<extend>>
+LA ..> LDA : <<extend>>
+
+ER ..> SCP : <<include>>
+ER ..> SMV : <<include>>
+
+
+@enduml

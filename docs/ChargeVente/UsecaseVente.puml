@@ -1,0 +1,48 @@
+@startuml
+left to right direction
+
+actor "Charge de vente" as CV
+
+rectangle "Gerer vente"{
+    usecase "Se connecter" as SC
+    usecase "Lister statistiques" as LS
+    usecase "Enregistrer vente" as EV
+    usecase "Lister commandes" as LC
+    
+    usecase "Voir encaissements" as VE
+    usecase "Voir encours clients total" as VECT
+    usecase "Voir commandes enregistrees" as VCE
+    
+    usecase "Selectionner client" as SCL
+    usecase "Ajouter article" as AA
+    usecase "Selectionner article" as SA
+    usecase "Saisir quantite" as SQ
+    usecase "Selectionner mode reglement" as SMR
+    usecase "Saisir montant versement" as SMV
+    usecase "Voir lignes" as VL
+}
+
+CV --> SC
+CV --> LS
+CV --> EV
+CV --> LC
+
+
+LC ..> VL : <<extend>>
+
+
+LS ..> VE   : <<include>>
+LS ..> VECT : <<include>>
+LS ..> VCE  : <<include>>
+
+
+EV ..> SCL : <<include>>
+EV ..> AA : <<include>>
+EV ..> SMR : <<include>>
+EV ..> SMV : <<include>>
+
+AA ..> SA : <<include>>
+AA ..> SQ : <<include>>
+
+
+@enduml

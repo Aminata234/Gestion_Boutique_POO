@@ -1,0 +1,37 @@
+@startuml
+
+left to right direction
+
+actor "Admin" as Admin
+
+rectangle "Admin Magasin" {
+
+    usecase "Se connecter" as sc 
+
+    usecase "Consulter le dashboard" as cld 
+
+    usecase "Effectuer une vente" as ev 
+    usecase "Gerer les dettes" as gd 
+    usecase "Effectuer un remboursement" as er 
+
+    usecase "Gerer les produits" as gp 
+    usecase "Gerer les clients" as gc 
+    usecase "Gerer les fournisseurs" as gf 
+    usecase "Gerer les approviosionnements" as ga 
+    usecase "Receptionner un bon de livraison" as rbl
+
+}
+
+Admin --> sc 
+Admin --> cld
+Admin --> ev 
+Admin --> gd 
+Admin --> er 
+Admin --> gp 
+Admin --> gf
+Admin --> ga 
+Admin --> rbl 
+
+
+
+@enduml
